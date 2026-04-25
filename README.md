@@ -3,8 +3,6 @@
 ## 🔗 Live Application  
 https://my-pdf-app-git-main-tejashree.vercel.app/
 
-## 📂 GitHub Repository  
-(Add your GitHub repo link here)
 
 ---
 
