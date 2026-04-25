@@ -14,15 +14,34 @@ export async function POST(req: NextRequest) {
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
+      temperature: 0.2, // 🔹 more consistent output
       messages: [
         {
           role: "system",
-          content:
-            "You MUST answer using the document content. Even if partial, try to answer.",
+          content: `
+You are an AI assistant that answers questions strictly based on the provided document.
+
+Rules:
+- Only use the document content
+- Do NOT make up information
+- If the answer is not present, say: "The document does not contain this information"
+- Keep answers clear and structured
+- Avoid repetition
+          `,
         },
         {
           role: "user",
-          content: `DOCUMENT:\n${context}\n\nQUESTION:\n${question}`,
+          content: `
+DOCUMENT:
+${context}
+
+QUESTION:
+${question}
+
+Respond in this format:
+- Short summary (2-3 lines)
+- Key points (bullet points)
+          `,
         },
       ],
     });
